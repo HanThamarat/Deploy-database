@@ -15,6 +15,16 @@ app.get('/',(req, res) => {
 
 app.get('/attractions', (req, res) => {
     connection.query(
+        'SELECT COUNT(*) as cout FROM attractions',
+        function(err, results, fields) {
+            console.log(results)
+            res.send(results)
+        }
+    )
+})
+
+app.get('/attractions/get', (req, res) => {
+    connection.query(
         'SELECT * FROM attractions',
         function(err, results, fields) {
             console.log(results)
@@ -22,5 +32,6 @@ app.get('/attractions', (req, res) => {
         }
     )
 })
+
 
 app.listen(process.env.PORT || 3000)
